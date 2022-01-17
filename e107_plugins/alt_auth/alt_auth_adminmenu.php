@@ -115,14 +115,18 @@ class alt_auth_admin extends alt_auth_base
 	private $alt_auth_user_fields = array(
 	  'user_id' 		=> array('prompt' => "User Id", 'help'=>'Use with caution', 'default' => false, 'optional' =>  TRUE, 'otherdb' =>  FALSE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => FALSE),
 	  'user_email' 		=> array('prompt' => LAN_ALT_12, 'default' => 'user_email', 'optional' =>  TRUE, 'otherdb' =>  TRUE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => TRUE, 'ldap_field' => 'mail'),
+	 
 	  'user_hideemail' 	=> array('prompt' => LAN_ALT_13, 'default' => 'user_hideemail', 'optional' =>  TRUE, 'otherdb' => TRUE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => TRUE, 'ldap_field' => '', 'method' => 'bool1'),
-	  'user_name' 		=> array('prompt' => LAN_ALT_14, 'default' => 'user_name', 'optional' => TRUE, 'otherdb' =>  TRUE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => TRUE, 'ldap_field' => ''),
-	  'user_login'		=> array('prompt' => LAN_ALT_15, 'default' => 'user_login', 'optional' =>  TRUE, 'otherdb' =>  TRUE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => TRUE, 'ldap_field' => 'sn'),
+	  'user_name' 		=> array('prompt' => LAN_ALT_14, 'default' => 'username', 'optional' => TRUE, 'otherdb' =>  TRUE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => TRUE, 'ldap_field' => ''),
+	  'user_loginname' 	=> array('prompt' => LAN_USER_02, 'default' => 'username', 'optional' => TRUE, 'otherdb' =>  TRUE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => TRUE, 'ldap_field' => ''),
+
+	  'user_login'		=> array('prompt' => LAN_USER_03, 'default' => 'name', 'optional' =>  TRUE, 'otherdb' =>  TRUE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => TRUE, 'ldap_field' => 'sn'),
+	  
 	  'user_customtitle'=> array('prompt' => LAN_ALT_16, 'default' => 'user_customtitle', 'optional' =>  TRUE, 'otherdb' => FALSE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => FALSE),
-	  'user_signature' 	=> array('prompt' => LAN_ALT_17, 'default' => 'user_signature', 'optional' =>  TRUE, 'otherdb' =>  TRUE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => FALSE),
+	  'user_signature' 	=> array('prompt' => LAN_ALT_17, 'default' => 'user_sig', 'optional' =>  TRUE, 'otherdb' =>  TRUE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => FALSE),
 	  'user_image' 		=> array('prompt' => LAN_ALT_18, 'default' => 'user_image', 'optional' =>  TRUE, 'otherdb' =>  TRUE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => FALSE),
 	  'user_sess' 		=> array('prompt' => LAN_ALT_19, 'default' => 'user_sess', 'optional' =>  TRUE, 'otherdb' =>  TRUE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => FALSE),
-	  'user_join' 		=> array('prompt' => LAN_ALT_20, 'default' => 'user_join', 'optional' =>  TRUE, 'otherdb' => FALSE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => TRUE, 'ldap_field' => ''),
+	  'user_join' 		=> array('prompt' => LAN_ALT_20, 'default' => 'user_regdate', 'optional' =>  TRUE, 'otherdb' => TRUE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => TRUE, 'ldap_field' => '', 'method' => 'strtotime'), 
 	  'user_ban'		=> array('prompt' => LAN_ALT_21, 'default' => 'user_ban', 'optional' =>  TRUE, 'otherdb' => FALSE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => FALSE),
 	  'user_class'		=> array('prompt' => LAN_ALT_22, 'default' => 'user_class', 'optional' =>  TRUE, 'otherdb' => FALSE, 'e107db' => TRUE, 'importdb' => FALSE, 'ldap' => FALSE)
 	);
@@ -515,7 +519,8 @@ class alt_auth_admin extends alt_auth_base
 					'ucase' => LAN_ALT_72,
 					'lcase' => LAN_ALT_73,
 					'ucfirst' => LAN_ALT_74,
-					'ucwords' => LAN_ALT_75
+					'ucwords' => LAN_ALT_75,
+					'strtotime' => LAN_ALT_81
 					);
 
 	/**

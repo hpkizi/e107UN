@@ -104,6 +104,7 @@ define('LAN_ALT_77', 'Only users in this class (on the database set above) are p
 define('LAN_ALT_78', 'Failed password action');
 define('LAN_ALT_79', 'If user exists in primary DB, but enters an incorrect password, how should that be handled?');
 define('LAN_ALT_80', "Port: ");
+define('LAN_ALT_81', '(strtotime) English date format to Unix timestamp');
 
 
 

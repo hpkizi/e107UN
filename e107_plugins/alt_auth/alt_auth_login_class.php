@@ -291,6 +291,8 @@ class alt_login
 					case 'FALSE' : return FALSE;
 				}
 				return $word;
+			case 'strtotime':  
+					return strtotime($word);
 			case 'ucase' :
 				return $tp->ustrtoupper($word);
 			case 'lcase' :
