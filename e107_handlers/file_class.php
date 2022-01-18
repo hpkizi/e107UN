@@ -1762,21 +1762,21 @@
 			switch($url)
 			{
 				case "core":
-					$localfile = 'e107-master.zip';
+					$localfile = 'e107UN-master.zip';
 					$remotefile = 'https://codeload.github.com/hpkizi/e107UN/zip/master';
 					$excludes = array(
-						'e107-master/.codeclimate.yml',
-						'e107-master/.editorconfig',
-						'e107-master/.gitignore',
-						'e107-master/.gitmodules',
-						'e107-master/CONTRIBUTING.md', # moved to ./.github/CONTRIBUTING.md
-						'e107-master/LICENSE',
-						'e107-master/README.md',
-						'e107-master/composer.json',
-						'e107-master/composer.lock',
-						'e107-master/install.php',
-						'e107-master/favicon.ico',
-                        'e107-master/e107_config.php',
+						'e107UN-master/.codeclimate.yml',
+						'e107UN-master/.editorconfig',
+						'e107UN-master/.gitignore',
+						'e107UN-master/.gitmodules',
+						'e107UN-master/CONTRIBUTING.md', # moved to ./.github/CONTRIBUTING.md
+						'e107UN-master/LICENSE',
+						'e107UN-master/README.md',
+						'e107UN-master/composer.json',
+						'e107UN-master/composer.lock',
+						'e107UN-master/install.php',
+						'e107UN-master/favicon.ico',
+                        'e107UN-master/e107_config.php',
 					);
 					$excludeMatch = array(
 						'/.github/',
