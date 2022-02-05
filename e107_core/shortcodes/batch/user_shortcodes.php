@@ -200,7 +200,7 @@ class user_shortcodes extends e_shortcode
 
 	function sc_user_join($parm='')
 	{
-		return e107::getDate()->convert_date($this->var['user_join'], "forum");
+		return e107::getDate()->convert_date($this->var['user_join'], "short");
 	}
 	
 	
