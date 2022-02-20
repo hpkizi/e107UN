@@ -1506,7 +1506,7 @@ $columnInfo = array(
 									 $text .= "     </select>";
 										   */
 		   
-		$text .= $frm->imagepicker('download_image', $download_image,'',array('media'=>'download_image', 'legacyPath'=>'{e_FILE}downloadimages'));
+		$text .= $frm->imagepicker('download_image', $download_image,'',array('media'=>'download_image^', 'legacyPath'=>'{e_FILE}downloadimages'));
 		  
 	      if ($subAction == "dlm" && $download_image)
 	      {
