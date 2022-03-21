@@ -568,31 +568,46 @@ class plugin_forum_view_shortcodes extends e_shortcode
 	function sc_emailitem()
 	{
  
-        if(is_null($this->postInfo['thread_start'])) {
-            return "<a class='e-tip btn btn-default btn-info btn-thread-email' href='" . e_HTTP . "email.php?plugin:forum." . $this->var['thread_id'] . "'>".e107::getParser()->toGlyph('fas-envelope')."</a>";
-        }
+        //check if emailing is allowed at all 
+        $pref_email_item_class = e107::getConfig()->get('email_item_class', e_UC_MEMBER);
         
-        if(!empty($this->postInfo['thread_start']))
+        $url = '';
+
+		if(check_class(varset($pref_email_item_class,e_UC_MEMBER)))
 		{
-            return "<a class='e-tip btn btn-default btn-info btn-thread-email' href='" . e_HTTP . "email.php?plugin:forum." . $this->var['thread_id'] . "'>".e107::getParser()->toGlyph('fas-envelope')."</a>";
-            //return e107::getParser()->parseTemplate("{EMAIL_ITEM=" . LAN_FORUM_2044 . "^plugin:forum.{$this->postInfo['post_thread']}}");
+			$url = e_HTTP . "email.php?plugin:forum." . $this->var['thread_id'];
 		}
+        
+        // the same code as in Post Reply
+        $emailUrl = "<a class='btn btn-default btn-info btn-thread-email" . ($url ? "" : " disabled") . "' "
+			.  " data-toggle='tooltip' data-bs-toggle='tooltip' title='" . LAN_FORUM_2044 . "'
+	           style='cursor: not-allowed; pointer-events: all !important;'"  . " href='" . ($url ?: "#") . "'>".e107::getParser()->toGlyph('fas-envelope')."</a>" . ($url ? "" : "<span>&nbsp;</span>");
+    
+        //outside posts inside template
+        if(is_null($this->postInfo['thread_start'])) return $emailUrl;
+       
+        //for first post 
+        if(!empty($this->postInfo['thread_start']))  return $emailUrl;
+ 
+         //return e107::getParser()->parseTemplate("{EMAIL_ITEM=" . LAN_FORUM_2044 . "^plugin:forum.{$this->postInfo['post_thread']}}");
+ 
 	}
 
     /* in the forum topic header */
 	function sc_printitem()
 	{
-    
-        if(is_null($this->postInfo['thread_start'])) {
-            return "<a class='e-tip btn btn-default btn-info btn-thread-print' href='" . e_HTTP . "print.php?plugin:forum." . $this->var['thread_id'] . "'>".e107::getParser()->toGlyph('fas-print')."</a>";
-        }
+        //see sc_emailitem() 
+        $url = e_HTTP . "print.php?plugin:forum." . $this->var['thread_id'];
         
-        if(!empty($this->postInfo['thread_start']))
-		{
-            return "<a class='e-tip btn btn-default btn-info btn-thread-print' href='" . e_HTTP . "print.php?plugin:forum." . $this->var['thread_id'] . "'>".e107::getParser()->toGlyph('fas-print')."</a>";
-            //return e107::getParser()->parseTemplate("{EMAIL_ITEM=" . LAN_FORUM_2044 . "^plugin:forum.{$this->postInfo['post_thread']}}");
-		}
-  
+        // the same code as in Post Reply
+        $printUrl = "<a class='btn btn-default btn-info btn-thread-print" . ($url ? "" : " disabled") . "' "
+			.  " data-toggle='tooltip' data-bs-toggle='tooltip' title='" . LAN_FORUM_2045 . "'
+	           style='cursor: not-allowed; pointer-events: all !important;'" . " href='" . ($url ?: "#") . "'>".e107::getParser()->toGlyph('fas-print')."</a>" . ($url ? "" : "<span>&nbsp;</span>");
+                       
+        if(is_null($this->postInfo['thread_start'])) return $printUrl;
+ 
+        if(!empty($this->postInfo['thread_start'])) return $printUrl;
+	 
         //	return e107::getParser()->parseTemplate("{PRINT_ITEM=" . LAN_FORUM_2045 . "^plugin:forum.{$this->postInfo['post_thread']}}");	 
 	}
 
@@ -989,7 +1004,7 @@ class plugin_forum_view_shortcodes extends e_shortcode
             if ($type == 'thread') {
                 $url = e107::url('forum', 'move', array('thread_id' => $threadID));
                 $text .= "<li class='text-right text-end float-right'><a class='dropdown-item' href='" . $url . "'>" . LAN_FORUM_2042 . " " . $tp->toGlyph('fa-arrows') . "</a></li>";
-            } elseif (e_DEVELOPER === true) { //TODO
+            } elseif (getperms('0')) { //TODO
                 $text .= "<li class='text-right text-end float-right'><a class='dropdown-item' href='" . e107::url('forum', 'split', array('thread_id' => $threadID, 'post_id' => $postID)) . "'>" . LAN_FORUM_2043 . " " . $tp->toGlyph('fa-cut') . "</a></li>";
             }
         }
@@ -1010,7 +1025,7 @@ class plugin_forum_view_shortcodes extends e_shortcode
       
             $text_options .= '
           		</button>
-    		<ul class="dropdown-menu pull-right dropdown-menu-end float-right text-right text-end">';
+    		<ul class="forum-view-options-menu dropdown-menu pull-right dropdown-menu-end float-right text-right text-end">';
             $text_options .= $text;
             $text_options .= '
       		</ul>
